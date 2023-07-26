@@ -6,6 +6,7 @@ import { addProducts, fetchingProducts, removeProducts, updateProducts } from '.
 const ProductsList = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const { products } = useSelector((state: any) => state.products)
+   
     useEffect(() => {
         dispatch(fetchingProducts())
     }, [])
@@ -14,8 +15,7 @@ const ProductsList = () => {
         <div>
             <button onClick={() => {
                 console.log("Add Clicked");
-                dispatch(addProducts({ name: "Product 3" }))
-
+                dispatch(addProducts({ name: "Product A", price: 200 }))
             }}>Add Products</button>
             <table className="border-collapse border border-slate-400">
                 <thead>
@@ -36,13 +36,15 @@ const ProductsList = () => {
                                         Add to cart
                                     </button>
                                     <button onClick={() => {
-                                        console.log("Add Clicked");
-                                        dispatch(removeProducts({ id: 3 }))
+                                        console.log("Remove Clicked");
+                                        // console.log("id", );
+                                        
+                                        dispatch(removeProducts({ id: item.id }))
 
                                     }}>Remove Products</button>
                                     <button onClick={() => {
                                         console.log("Update Clicked");
-                                        dispatch(updateProducts({ name: "Product 3 update", id: 2 }))
+                                        dispatch(updateProducts({ name: "Product update", price: 300, id:  item.id }))
 
                                     }}>Update Products</button>
                                 </td>
