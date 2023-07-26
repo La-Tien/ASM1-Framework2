@@ -7,7 +7,7 @@ const intialState = {
 const cartReducers = (state = intialState, action: any) => {
         return produce(state, draftState => {
         switch (action.type) {
-            case "CART/ADD":
+            case "cart/add":
                 const existProduct = draftState.items.findIndex((item: any) => item.id === action.payload.id)
                 // -1
                 if (existProduct === -1) {
@@ -16,10 +16,10 @@ const cartReducers = (state = intialState, action: any) => {
                     draftState.items[existProduct].quantity++;
                 }
                 break;
-            case "CART/INCREASE":
+            case "cart/increase":
                 draftState.items.find(item => item.id == action.payload).quantity++
                 break;
-            case "CART/DECREASE":
+            case "cart/decrease":
                 const product = draftState.items.find(item => item.id == action.payload);
                 product.quantity--;
                 if (product.quantity < 1) {

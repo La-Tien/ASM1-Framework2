@@ -5,23 +5,40 @@ const Cart = () => {
     const { items } = useSelector((state: any) => state.cart);
     return (
         <div>
-            {items?.map((item: any) => (
-                <div key={item.id}>
-                    {item.name} - {item?.quantity} - {item?.price * item?.quantity}
-                    <button
-                        onClick={() => dispatch({ type: "cart/increase", payload: item.id })}
-                    >Increase
-                    </button>
-                    <button
-                        onClick={() =>{
-                            console.log("Click decrease");
-                             dispatch({ type: "cart/decrease", payload: item.id })}
-                        } 
-                    >
-                        Decrease
-                    </button>
-                </div>
-            ))}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {items?.map((item: any) => {
+                        return (
+                            <tr key={item.id}>
+                                <td>{item.name}</td>
+                                <td>
+                                    <button
+                                        onClick={() => dispatch({ type: "cart/increase", payload: item.id })}
+                                    > +
+                                    </button>
+                                    <label> {item?.quantity} </label>
+                                    <button
+                                        onClick={() => {
+                                            // console.log("Click decrease");
+                                            dispatch({ type: "cart/decrease", payload: item.id })
+                                        }
+                                        }
+                                    >
+                                        -
+                                    </button>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+
             Total:
             {items.reduce(function (sum: any, item: any) {
                 return sum + item.price * item.quantity;

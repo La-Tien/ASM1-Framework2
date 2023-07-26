@@ -10,6 +10,8 @@ function App() {
   return (
    <div>
      <ProductsList />
+     <hr />
+     <h2>List Cart</h2>
     <Cart />
    </div>
   )
